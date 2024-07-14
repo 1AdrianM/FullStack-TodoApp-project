@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import Users from "../Models/Users"
+import Users, { IUser } from "../Models/Users"
 import bcrypt from 'bcrypt'
 
 const getAllUsers =async(req:Request, res:Response)=>{
@@ -12,10 +12,14 @@ const response = res.status(201).json(user)
 return response;
 }
 
-const CreateUser =async (req:Request, res:Response)=>{
+const createUser =async (req:Request, res:Response)=>{
 const {name, username, email, password}= req.body
 
 if(!name || !username || !email|| !password) res.status(400).json({message:'invalid inputs'})
+const duplicated = await Users.findOne({email})
+if(duplicated){
+    return res.status(409).json({message:'user duplicated, could not perform creation'})
+}
 try{
   const hashed_password = await bcrypt.hash(password, 10);  
 const userObj ={name: name , username: username, email: email, password:hashed_password}
@@ -44,9 +48,44 @@ res.status(201).json(user);
 }
 }
 const updateUser =async(req:Request, res: Response)=>{
-const {name, username, email, password} = req.body
+const {id, name, username, email, password} = req.body
+if(!name ||!id|| !username || !email|| !password) res.status(400).json({message:'invalid inputs'})
+    
+    try{
+    const hashed_password = await bcrypt.hash(password, 10)
+
+    const user = await Users.findById(id);
+if(!user) {
+ return res.status(400).json({message:'Something wrong happend'})
+}
+user.name = name
+user.username=username
+user.email=email
+user.password= hashed_password
+
+const updatedUser = user?.save()
+
+res.status(201).json(updatedUser)
+}
+catch(err){
+    console.log(err)
+    res.status(500).json(err)
+}
 }
 const deleteUser =async(req:Request, res:Response)=>{
-const{id} = req.body.id
+const{id} = req.params;
+if(!id) res.status(400).json({message:'Id not found'})
+const user = await Users.findById(id).exec();
+
+if(!user)res.status(400).json({message:'User Not found'})
+
+    const result = await user?.deleteOne()
+    res.json({message:'user deleted'})
 
 }
+export default {
+    createUser,  
+    getAllUsers,
+     getUserById,
+      deleteUser,
+      updateUser}

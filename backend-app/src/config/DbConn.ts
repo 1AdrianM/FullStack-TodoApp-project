@@ -10,3 +10,4 @@ const DbConnect =async ()=>{
  }
     
 }
+export default DbConnect;
