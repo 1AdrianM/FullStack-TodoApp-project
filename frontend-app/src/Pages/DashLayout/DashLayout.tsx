@@ -7,7 +7,7 @@ const DashLayout = () => {
         <>
         <NavBar/>
                     <Outlet />
-                    <Footer/>
+        <Footer/>
 
         </>
     )

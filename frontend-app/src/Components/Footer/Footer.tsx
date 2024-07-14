@@ -2,7 +2,7 @@
 const Footer =()=>{
 
 const content =(
-    <footer className="footer--dash">
+    <footer className="bg-cyan-800 flex ">
 <p className="">Adrian Mateo</p>
     </footer>
 )

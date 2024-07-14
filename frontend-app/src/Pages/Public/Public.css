@@ -1,0 +1,77 @@
+.nav--public{
+    display: flex;
+    background-color: darkcyan;
+justify-content: flex-start;
+gap: 5rem;
+    padding: 1rem;
+}
+a{
+    text-decoration: none;
+    font-size: 1.2rem;
+    color:black
+
+}
+.main--public{
+min-height: 100vh;
+min-width: 100%;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+margin-bottom: 3rem;
+gap: 9rem;
+}
+.right--sect{
+    
+    font-size: 2.5rem;
+    margin-left: 3rem;
+    min-width:40%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+
+}
+.left--sect img{
+width: 620px;
+border:  0.4rem solid cyan;
+border-radius: 15px 15px;
+}
+.left--sect{
+display: flex;
+flex-direction: column;
+justify-content: center;
+
+align-items: center;
+
+}
+.bottm--section{
+    margin-top: 1rem;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ padding-left: 1rem;
+ background-color: cyan;
+ color: black;
+ width: 620px;
+ border-radius: 10px;
+min-height: 9rem;
+gap: 1rem;
+}
+.footer--public{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    background-color: darkcyan;
+    padding: 0.5srem;
+
+}
+.btn--1{
+    margin-top: 1.25rem;
+    margin-left: 1rem;
+    background-color:darkturquoise;
+    display: block;
+padding: 1rem;
+border-radius: 1rem;
+width: 10rem;
+font-size: 1rem;
+}
